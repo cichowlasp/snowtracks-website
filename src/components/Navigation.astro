@@ -19,11 +19,15 @@ const isHome = pathname === '/' || pathname === '/index.html';
 						<div class='w-8 h-8 relative overflow-hidden rounded-lg shadow-sm border border-border'>
 							<Picture
 								src={LogoLight}
+								width={168}
+								widths={[168, 336]}
 								alt=''
 								class='absolute inset-0 w-full h-full object-cover dark:hidden'
 							/>
 							<Picture
 								src={LogoDark}
+								width={168}
+								widths={[168, 336]}
 								alt=''
 								class='absolute inset-0 w-full h-full object-cover hidden dark:block'
 							/>
