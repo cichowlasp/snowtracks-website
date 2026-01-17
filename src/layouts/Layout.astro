@@ -12,9 +12,19 @@ import Navigation from '../components/Navigation.astro';
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 		<meta name='generator' content={Astro.generator} />
 		<title>SnowTracks</title>
+		<script is:inline src='https://unpkg.com/@phosphor-icons/web@latest'
+		></script>
+		<script is:inline>
+			const theme = localStorage.getItem('theme') || 'system';
+			const isDark =
+				theme === 'dark' ||
+				(theme === 'system' &&
+					window.matchMedia('(prefers-color-scheme: dark)').matches);
+			document.documentElement.classList.toggle('dark', isDark);
+		</script>
 	</head>
 	<body class='w-full h-full m-0 bg-background'>
-		<!-- <Navigation /> -->
+		<Navigation />
 		<slot />
 		<Footer />
 	</body>

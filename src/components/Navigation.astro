@@ -1,32 +1,253 @@
+---
+import { Picture } from 'astro:assets';
+import LogoLight from '../assets/SnowTracks_light.png';
+import LogoDark from '../assets/SnowTracks_dark.png';
+
+// Automatically detect if we are on the home page
+const pathname = Astro.url.pathname;
+const isHome = pathname === '/' || pathname === '/index.html';
+---
+
 <nav
-	class='sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md'
+	class='sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md'
 >
-	<div class='mx-auto flex max-w-7xl items-center justify-between p-4 px-6'>
-		<div class='flex items-center gap-2'>
-			<div
-				class='bg-primary flex h-8 w-8 items-center justify-center rounded-lg shadow-lg'
-			>
-				<i class='ph-bold ph-mountains text-primary-foreground text-xl'
-				></i>
-			</div>
-			<span class='text-xl font-bold tracking-tight'>SnowTracks</span>
+	<div class='max-w-6xl mx-auto px-6 h-16 flex items-center justify-between'>
+		<div class='flex items-center'>
+			{
+				isHome ? (
+					<div class='flex items-center gap-2'>
+						<div class='w-8 h-8 relative overflow-hidden rounded-lg shadow-sm border border-border'>
+							<Picture
+								src={LogoLight}
+								alt=''
+								class='absolute inset-0 w-full h-full object-cover dark:hidden'
+							/>
+							<Picture
+								src={LogoDark}
+								alt=''
+								class='absolute inset-0 w-full h-full object-cover hidden dark:block'
+							/>
+						</div>
+						<span class='font-black uppercase tracking-tighter italic text-foreground text-lg'>
+							SnowTracks
+						</span>
+					</div>
+				) : (
+					<a
+						href='/'
+						class='flex items-center gap-3 group text-foreground hover:text-primary transition-all'>
+						<div class='bg-primary w-8 h-8 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg shadow-primary/20'>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								class='w-4 h-4 text-primary-foreground'
+								viewBox='0 0 24 24'
+								fill='none'
+								stroke='currentColor'
+								stroke-width='3'
+								stroke-linecap='round'
+								stroke-linejoin='round'>
+								<path d='m15 18-6-6 6-6' />
+							</svg>
+						</div>
+						<span class='text-sm font-bold uppercase tracking-tight'>
+							Back to Home
+						</span>
+					</a>
+				)
+			}
 		</div>
-		<div class='hidden md:block'>
-			<a
-				href='#features'
-				class='hover:text-primary px-4 py-2 text-sm font-medium transition-colors'
-				>Features</a
+
+		<div
+			class='flex items-center gap-1.5 bg-card/50 p-1 rounded-md border border-border backdrop-blur-sm hover:bg-card/70 transition-colors'
+		>
+			<button
+				id='theme-light'
+				class='hover:cursor-pointer p-1.5 rounded transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-primary/10 flex items-center justify-center'
+				title='Light theme'
+				aria-label='Switch to light theme'
 			>
-			<a
-				href='#screenshots'
-				class='hover:text-primary px-4 py-2 text-sm font-medium transition-colors'
-				>Screenshots</a
+				<svg class='w-4 h-4' fill='currentColor' viewBox='0 0 24 24'>
+					<circle cx='12' cy='12' r='5'></circle>
+					<line
+						x1='12'
+						y1='1'
+						x2='12'
+						y2='3'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'></line>
+					<line
+						x1='12'
+						y1='21'
+						x2='12'
+						y2='23'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'></line>
+					<line
+						x1='4.22'
+						y1='4.22'
+						x2='5.64'
+						y2='5.64'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'></line>
+					<line
+						x1='18.36'
+						y1='18.36'
+						x2='19.78'
+						y2='19.78'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'></line>
+					<line
+						x1='1'
+						y1='12'
+						x2='3'
+						y2='12'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'></line>
+					<line
+						x1='21'
+						y1='12'
+						x2='23'
+						y2='12'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'></line>
+					<line
+						x1='4.22'
+						y1='19.78'
+						x2='5.64'
+						y2='18.36'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'></line>
+					<line
+						x1='18.36'
+						y1='5.64'
+						x2='19.78'
+						y2='4.22'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'></line>
+				</svg>
+			</button>
+			<div class='w-px h-4 bg-border/50'></div>
+			<button
+				id='theme-dark'
+				class='hover:cursor-pointer p-1.5 rounded transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-primary/10 flex items-center justify-center'
+				title='Dark theme'
+				aria-label='Switch to dark theme'
 			>
-			<a
-				href='#'
-				class='bg-primary text-primary-foreground ml-4 rounded-full px-5 py-2 text-sm font-bold shadow-sm hover:opacity-90 transition-opacity'
-				>Get Started</a
+				<svg
+					class='w-4 h-4'
+					fill='none'
+					stroke='currentColor'
+					viewBox='0 0 24 24'
+					stroke-width='2'
+				>
+					<path
+						d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'
+						stroke='currentColor'
+						stroke-width='2'
+						fill='none'></path>
+				</svg>
+			</button>
+			<div class='w-px h-4 bg-border/50'></div>
+			<button
+				id='theme-system'
+				class='hover:cursor-pointer p-1.5 rounded transition-all duration-200 text-muted-foreground hover:text-foreground hover:bg-primary/10 flex items-center justify-center'
+				title='System theme'
+				aria-label='Follow system theme'
 			>
+				<svg
+					class='w-4 h-4'
+					fill='none'
+					stroke='currentColor'
+					viewBox='0 0 24 24'
+					stroke-width='2'
+				>
+					<rect x='2' y='3' width='20' height='14' rx='2' ry='2'
+					></rect>
+					<line x1='8' y1='21' x2='16' y2='21'></line>
+					<line x1='12' y1='17' x2='12' y2='21'></line>
+				</svg>
+			</button>
 		</div>
 	</div>
 </nav>
+
+<script is:inline>
+	// 1. Unified Theme Apply Function
+	const applyTheme = () => {
+		const theme = localStorage.getItem('theme') || 'system';
+		const isDark =
+			theme === 'dark' ||
+			(theme === 'system' &&
+				window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+		// Apply theme to document
+		const html = document.documentElement;
+
+		// Always remove both first
+		html.classList.remove('light', 'dark');
+
+		// Then add the appropriate one
+		if (theme === 'light') {
+			html.classList.add('light');
+		} else if (theme === 'dark') {
+			html.classList.add('dark');
+		} else {
+			// system mode - check system preference and add class
+			if (isDark) {
+				html.classList.add('dark');
+			}
+		}
+
+		// Update Button Visuals
+		const btns = {
+			light: document.getElementById('theme-light'),
+			dark: document.getElementById('theme-dark'),
+			system: document.getElementById('theme-system'),
+		};
+
+		Object.entries(btns).forEach(([key, btn]) => {
+			if (!btn) return;
+			// Remove all active styles
+			btn.classList.remove('bg-primary/20', 'text-primary');
+
+			// Add active styles to current theme button
+			if (key === theme) {
+				btn.classList.add('bg-primary/20', 'text-primary');
+			}
+		});
+	};
+
+	// 2. Initialize on load
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', applyTheme);
+	} else {
+		applyTheme();
+	}
+
+	// 3. Setup Click Handlers
+	const setupButtons = () => {
+		['light', 'dark', 'system'].forEach((id) => {
+			const btn = document.getElementById(`theme-${id}`);
+			if (btn) {
+				btn.addEventListener('click', () => {
+					localStorage.setItem('theme', id);
+					applyTheme();
+					// Force a small delay to ensure DOM updates
+					setTimeout(() => {
+						window.dispatchEvent(new Event('theme-changed'));
+					}, 0);
+				});
+			}
+		});
+	};
+
+	setupButtons();
+</script>
