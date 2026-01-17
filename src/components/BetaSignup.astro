@@ -1,0 +1,123 @@
+---
+// src/components/BetaSignup.astro
+---
+
+<section class='py-16 px-6'>
+	<div
+		class='max-w-lg mx-auto bg-card border-4 border-border rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden'
+	>
+		<div
+			class='absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl'
+		>
+		</div>
+
+		<div id='form-content'>
+			<div class='text-center mb-8'>
+				<h2 class='text-3xl font-black mb-3 text-foreground'>
+					Closed Beta
+				</h2>
+				<p class='text-muted-foreground'>
+					Join the waiting list for early access to the SnowTracks
+					testing track.
+				</p>
+			</div>
+
+			<form
+				id='beta-tester-form'
+				action='https://docs.google.com/forms/d/e/1FAIpQLScHCjylYYJDIIJqhX9I2p0Z6kErxLdxOcVLlAC-iy5y-UVhEA/formResponse'
+				method='POST'
+				class='space-y-4'
+			>
+				<div class='relative'>
+					<input
+						type='email'
+						name='entry.1612656547'
+						id='email-field'
+						required
+						placeholder='Enter your email'
+						class='w-full px-6 py-4 bg-background border-2 border-border rounded-2xl focus:ring-4 focus:ring-primary/20 outline-none transition-all placeholder:opacity-50 placeholder:text-foreground'
+					/>
+				</div>
+
+				<button
+					type='submit'
+					id='submit-button'
+					class='w-full bg-primary text-primary-foreground font-bold py-4 rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg flex items-center justify-center gap-2'
+				>
+					<span class='text-foreground'>Request Access</span>
+					<svg
+						class='text-foreground'
+						xmlns='http://www.w3.org/2000/svg'
+						width='20'
+						height='20'
+						viewBox='0 0 24 24'
+						fill='none'
+						stroke='currentColor'
+						stroke-width='2'
+						stroke-linecap='round'
+						stroke-linejoin='round'
+						><path d='M5 12h14'></path><path d='m12 5 7 7-7 7'
+						></path></svg
+					>
+				</button>
+			</form>
+
+			<p
+				class='text-[10px] text-center text-foreground mt-6 uppercase tracking-[0.2em] opacity-40 font-bold'
+			>
+				Limited slots available
+			</p>
+		</div>
+
+		<div id='success-state' class='hidden text-center py-10'>
+			<div
+				class='w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6'
+			>
+				<span class='text-4xl'>🏂</span>
+			</div>
+			<h3 class='text-2xl font-black mb-2'>You're on the list!</h3>
+			<p class='text-muted-foreground'>
+				We'll send an invite to your email as soon as a spot opens up in
+				the closed test.
+			</p>
+		</div>
+	</div>
+</section>
+
+<script>
+	const form = document.getElementById('beta-tester-form') as HTMLFormElement;
+	const formContent = document.getElementById('form-content');
+	const successState = document.getElementById('success-state');
+	const submitBtn = document.getElementById('submit-button');
+
+	form?.addEventListener('submit', async (e) => {
+		e.preventDefault();
+
+		if (submitBtn) {
+			submitBtn.innerHTML = `<span>Joining...</span>`;
+			submitBtn.style.opacity = '0.7';
+			submitBtn.style.pointerEvents = 'none';
+		}
+
+		try {
+			// Use 'no-cors' for Google Forms
+			await fetch(form.action, {
+				method: 'POST',
+				mode: 'no-cors',
+				body: new FormData(form),
+			});
+
+			// Transition to success state
+			formContent?.classList.add('hidden');
+			successState?.classList.remove('hidden');
+		} catch (error) {
+			console.error('Submission error:', error);
+			alert('Something went wrong. Please try again.');
+			if (submitBtn) {
+				submitBtn.innerHTML = `<span>Request Access</span>`;
+				submitBtn.style.opacity = '1';
+				submitBtn.style.pointerEvents = 'auto';
+			}
+		}
+	});
+</script>

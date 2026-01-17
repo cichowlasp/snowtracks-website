@@ -1,5 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
+import BetaSignup from '../components/BetaSignup.astro';
 import Screen1 from '../assets/Screenshot1.png';
 import Screen2 from '../assets/Screenshot2.png';
 import Screen3 from '../assets/Screenshot3.png';
@@ -255,7 +256,14 @@ const screenshots = [
 			</svg>
 		</a>
 	</section>
-
+	<div class='flex justify-center mb-20 px-6'>
+		<a
+			href='/join'
+			class='w-full max-w-xs bg-foreground text-background text-center font-black uppercase tracking-[0.2em] py-4 rounded-2xl hover:scale-105 transition-transform shadow-xl'
+		>
+			Join the Closed Beta
+		</a>
+	</div>
 	<section class='max-w-6xl mx-auto px-6 pb-24'>
 		<h2
 			class='text-xs font-bold tracking-[0.3em] uppercase text-center text-muted-foreground mb-10'
