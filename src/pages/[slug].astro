@@ -1,0 +1,258 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const entries = await getCollection('legal');
+	return entries.map((entry: CollectionEntry<'legal'>) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+// 1. Define the type for the props
+interface Props {
+	entry: CollectionEntry<'legal'>;
+}
+
+// 2. Astro.props now knows that 'entry' belongs to the 'legal' collection
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<style is:global>
+	.prose-custom {
+		--spacing-base: 1rem;
+	}
+
+	/* Headings */
+	.prose-custom h1 {
+		font-size: 2.5rem;
+		font-weight: 800;
+		color: var(--foreground);
+		margin-top: 2.5rem;
+		margin-bottom: 1.5rem;
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+	}
+
+	.prose-custom h1:first-child {
+		margin-top: 0;
+	}
+
+	.prose-custom h2 {
+		font-size: 1.875rem;
+		font-weight: 700;
+		color: var(--foreground);
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+		line-height: 1.3;
+		padding-bottom: 0.5rem;
+		border-bottom: 2px solid var(--border);
+	}
+
+	.prose-custom h3 {
+		font-size: 1.375rem;
+		font-weight: 700;
+		color: var(--primary);
+		margin-top: 1.5rem;
+		margin-bottom: 0.75rem;
+		line-height: 1.4;
+	}
+
+	.prose-custom h4 {
+		font-size: 1.125rem;
+		font-weight: 700;
+		color: var(--foreground);
+		margin-top: 1.25rem;
+		margin-bottom: 0.5rem;
+	}
+
+	/* Paragraphs */
+	.prose-custom p {
+		color: var(--foreground);
+		line-height: 1.75;
+		margin-bottom: 1.25rem;
+		font-size: 1rem;
+	}
+
+	/* Links */
+	.prose-custom a {
+		color: var(--primary);
+		font-weight: 600;
+		text-decoration: none;
+		border-bottom: 2px solid transparent;
+		transition: all 0.2s ease;
+		position: relative;
+	}
+
+	.prose-custom a:hover {
+		border-bottom-color: var(--primary);
+		opacity: 0.8;
+	}
+
+	/* Strong & Em */
+	.prose-custom strong {
+		font-weight: 700;
+		color: var(--foreground);
+	}
+
+	.prose-custom em {
+		font-style: italic;
+		color: var(--foreground);
+	}
+
+	/* Lists */
+	.prose-custom ul {
+		list-style-type: none;
+		margin-bottom: 1.25rem;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	.prose-custom ul > li {
+		color: var(--foreground);
+		margin-bottom: 0.625rem;
+		padding-left: 1.75rem;
+		position: relative;
+	}
+
+	.prose-custom ul > li:before {
+		content: '▸';
+		position: absolute;
+		left: 0;
+		color: var(--primary);
+		font-size: 1.25rem;
+		line-height: 1.75rem;
+	}
+
+	.prose-custom ol {
+		margin-bottom: 1.25rem;
+		margin-left: 1.75rem;
+		padding-left: 0;
+		color: var(--foreground);
+	}
+
+	.prose-custom ol > li {
+		color: var(--foreground);
+		margin-bottom: 0.625rem;
+	}
+
+	/* Code */
+	.prose-custom code {
+		background-color: var(--card);
+		color: var(--accent);
+		padding: 0.25rem 0.6rem;
+		border-radius: 0.375rem;
+		font-size: 0.9em;
+		font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+		font-weight: 500;
+		border: 1px solid var(--border);
+	}
+
+	/* Horizontal Rule */
+	.prose-custom hr {
+		border: none;
+		border-top: 2px solid var(--border);
+		margin-top: 2.5rem;
+		margin-bottom: 2.5rem;
+		background: linear-gradient(
+			to right,
+			transparent,
+			var(--border),
+			transparent
+		);
+	}
+
+	/* Blockquote */
+	.prose-custom blockquote {
+		border-left: 4px solid var(--primary);
+		padding-left: 1.25rem;
+		padding: 1rem 1.25rem;
+		margin-top: 1.5rem;
+		margin-bottom: 1.5rem;
+		margin-left: 0;
+		background-color: var(--card);
+		border-radius: 0.375rem;
+		font-style: italic;
+		color: var(--muted-foreground);
+	}
+
+	.prose-custom blockquote p {
+		margin-bottom: 0;
+	}
+
+	/* Tables */
+	.prose-custom table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 1.5rem;
+		font-size: 0.95rem;
+	}
+
+	.prose-custom thead {
+		background-color: var(--card);
+		border-bottom: 2px solid var(--border);
+	}
+
+	.prose-custom th {
+		padding: 0.75rem;
+		text-align: left;
+		font-weight: 700;
+		color: var(--foreground);
+	}
+
+	.prose-custom td {
+		padding: 0.75rem;
+		color: var(--foreground);
+		border-bottom: 1px solid var(--border);
+	}
+
+	.prose-custom tbody tr:hover {
+		background-color: var(--card);
+	}
+
+	/* Images */
+	.prose-custom img {
+		max-width: 100%;
+		height: auto;
+		border-radius: 0.5rem;
+		margin-top: 1.5rem;
+		margin-bottom: 1.5rem;
+		border: 1px solid var(--border);
+	}
+
+	/* Pre (code blocks) */
+	.prose-custom pre {
+		background-color: var(--card);
+		border: 1px solid var(--border);
+		border-radius: 0.5rem;
+		padding: 1rem;
+		overflow-x: auto;
+		margin-bottom: 1.5rem;
+	}
+
+	.prose-custom pre code {
+		background-color: transparent;
+		color: var(--accent);
+		padding: 0;
+		border: none;
+		font-size: 0.875rem;
+	}
+</style>
+
+<Layout title={entry.data.title}>
+	<main class='max-w-3xl mx-auto px-6 py-16'>
+		<article class='prose-custom'>
+			<Content />
+		</article>
+
+		<div class='mt-12 pt-8 border-t border-border'>
+			<a
+				href='/'
+				class='text-primary font-bold hover:underline transition-opacity hover:opacity-80'
+				>← Back to Home</a
+			>
+		</div>
+	</main>
+</Layout>
