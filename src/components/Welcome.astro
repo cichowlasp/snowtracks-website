@@ -57,17 +57,19 @@ const screenshots = [
 	<section
 		class='flex flex-col sm:flex-row items-center justify-center gap-4 px-6 mb-20'
 	>
-		<a href='#' class='hover:opacity-80 transition-opacity'>
+		<a
+			href='#'
+			aria-label='Download SnowTracks from Google Play'
+			class='hover:opacity-80 transition-opacity'
+		>
 			<svg
 				class='h-12 w-auto'
 				xmlns='http://www.w3.org/2000/svg'
-				xmlns:cc='http://creativecommons.org/ns#'
-				xmlns:dc='http://purl.org/dc/elements/1.1/'
-				xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
 				id='svg51'
 				version='1.1'
 				viewBox='0 0 180 53.333'
 				xml:space='preserve'
+				role='img'
 				><metadata id='metadata9'
 					><rdf:RDF
 						><cc:Work rdf:about=''
@@ -110,10 +112,15 @@ const screenshots = [
 					fill='#fff'
 					stroke='#fff'
 					stroke-miterlimit='10'
-					stroke-width='.26666'></path></svg
-			>
+					stroke-width='.26666'></path>
+				<title>Google Play</title>
+			</svg>
 		</a>
-		<a href='#' class='hover:opacity-80 transition-opacity'>
+		<a
+			href='#'
+			class='hover:opacity-80 transition-opacity'
+			aria-label='Download SnowTracks from App Store'
+		>
 			<svg
 				class='h-12 w-auto'
 				xmlns='http://www.w3.org/2000/svg'
@@ -127,6 +134,7 @@ const screenshots = [
 				viewBox='0 0 135 40'
 				enable-background='new 0 0 135 40'
 				xml:space='preserve'
+				role='img'
 			>
 				<g>
 					<path
@@ -239,6 +247,7 @@ const screenshots = [
 						</g>
 					</g>
 				</g>
+				<title>App Store</title>
 			</svg>
 		</a>
 	</section>
@@ -259,6 +268,8 @@ const screenshots = [
 							formats={['avif', 'webp']}
 							alt={item.alt}
 							class='w-full h-full object-cover'
+							widths={[300, 600, 800, item.src.width]}
+							sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
 							pictureAttributes={{ class: 'w-full h-full block' }}
 						/>
 					</div>
