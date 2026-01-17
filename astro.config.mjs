@@ -3,6 +3,5 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://cichowlasp.github.io',
-	base: '/snowtracks-website',
+	site: 'https://snowtracks.cichowlasp.org',
 });
