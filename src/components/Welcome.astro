@@ -1,6 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
-import BetaSignup from '../components/BetaSignup.astro';
+import ImageGallery from './ImageGallery.astro';
 import Screen1 from '../assets/Screenshot1.png';
 import Screen2 from '../assets/Screenshot2.png';
 import Screen3 from '../assets/Screenshot3.png';
@@ -271,22 +271,6 @@ const screenshots = [
 			App Gallery
 		</h2>
 
-		<div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
-			{
-				screenshots.map((item) => (
-					<div class='bg-card border-4 sm:border-8 border-border rounded-[2.5rem] overflow-hidden shadow-xl aspect-9/16 flex items-center justify-center'>
-						<Picture
-							src={item.src}
-							formats={['avif', 'webp']}
-							alt={item.alt}
-							class='w-full h-full object-cover'
-							widths={[300, 600, 800, item.src.width]}
-							sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'
-							pictureAttributes={{ class: 'w-full h-full block' }}
-						/>
-					</div>
-				))
-			}
-		</div>
+		<ImageGallery screenshots={screenshots} />
 	</section>
 </main>
