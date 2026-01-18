@@ -16,7 +16,7 @@
 				<h2 class='text-3xl font-black mb-3 text-foreground'>
 					Closed Beta
 				</h2>
-				<p class='text-muted-foreground'>
+				<p class='text-muted-foreground text-sm'>
 					Join the waiting list for early access to the SnowTracks
 					testing track.
 				</p>
@@ -26,7 +26,7 @@
 				id='beta-tester-form'
 				action='https://docs.google.com/forms/d/e/1FAIpQLScHCjylYYJDIIJqhX9I2p0Z6kErxLdxOcVLlAC-iy5y-UVhEA/formResponse'
 				method='POST'
-				class='space-y-4'
+				class='space-y-6'
 			>
 				<div class='relative'>
 					<input
@@ -37,6 +37,15 @@
 						placeholder='Enter your email'
 						class='w-full px-6 py-4 bg-background border-2 border-border rounded-2xl focus:ring-4 focus:ring-primary/20 outline-none transition-all placeholder:opacity-50 placeholder:text-foreground'
 					/>
+					<p
+						class='mt-3 px-1 text-[11px] leading-relaxed text-muted-foreground italic'
+					>
+						<span class='text-primary font-bold'>Important:</span> Please
+						use the email address associated with your <span
+							class='text-foreground font-bold'
+							>Google Play Store</span
+						> account to receive the testing invite.
+					</p>
 				</div>
 
 				<button
@@ -76,9 +85,19 @@
 				<span class='text-4xl'>🏂</span>
 			</div>
 			<h3 class='text-2xl font-black mb-2'>You're on the list!</h3>
-			<p class='text-muted-foreground'>
+			<p class='text-muted-foreground mb-6'>
 				We'll send an invite to your email as soon as a spot opens up in
 				the closed test.
+			</p>
+			<p
+				class='text-[10px] uppercase tracking-widest opacity-50 font-bold border-t border-border pt-6'
+			>
+				Not a Google Play email? <br />
+				<button
+					onclick='window.location.reload()'
+					class='underline hover:text-primary transition-colors'
+					>Click here to retry</button
+				>
 			</p>
 		</div>
 	</div>
@@ -100,14 +119,12 @@
 		}
 
 		try {
-			// Use 'no-cors' for Google Forms
 			await fetch(form.action, {
 				method: 'POST',
 				mode: 'no-cors',
 				body: new FormData(form),
 			});
 
-			// Transition to success state
 			formContent?.classList.add('hidden');
 			successState?.classList.remove('hidden');
 		} catch (error) {
