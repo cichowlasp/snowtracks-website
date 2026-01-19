@@ -12,7 +12,7 @@ const { screenshots } = Astro.props;
 	{
 		screenshots.map((item, index) => (
 			<button
-				class='gallery-trigger group relative bg-card border-4 sm:border-8 border-border rounded-[2.5rem] overflow-hidden shadow-xl aspect-9/16 cursor-pointer hover:scale-[1.02] hover:border-primary transition-all'
+				class='gallery-trigger group relative bg-card border-4 sm:border-8 border-border rounded-[2.5rem] overflow-hidden shadow-xl aspect-9/19 cursor-pointer hover:scale-[1.02] hover:border-primary transition-all'
 				data-index={index}
 				aria-label={`View ${item.alt} in full screen`}>
 				<Picture
@@ -143,9 +143,9 @@ const { screenshots } = Astro.props;
 						'animate-in',
 						'fade-in',
 						'zoom-in',
-						'duration-300'
+						'duration-300',
 					),
-				10
+				10,
 			);
 		};
 
