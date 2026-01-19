@@ -14,7 +14,7 @@ const { screenshots } = Astro.props;
 	{
 		screenshots.map((item, index) => (
 			<button
-				class='hover:border-accent gallery-trigger group relative flex-none snap-center cursor-pointer hover:scale-[1.02] transition-all h-[70dvh] w-[calc(70dvh*9/19)] sm:h-auto sm:w-auto sm:aspect-9/19 bg-card border-4 sm:border-8 border-border rounded-[2.5rem] overflow-hidden shadow-xl'
+				class='hover:border-accent gallery-trigger group relative flex-none snap-center cursor-pointer hover:scale-[1.02] transition-all h-[70vh] w-[calc(70vh*9/19)] sm:h-auto sm:w-auto sm:aspect-9/19 bg-card border-4 sm:border-8 border-border rounded-[2.5rem] overflow-hidden shadow-xl'
 				data-index={index}
 				aria-label={`View ${item.alt} in full screen`}>
 				<Picture
