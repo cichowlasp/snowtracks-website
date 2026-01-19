@@ -8,11 +8,13 @@ interface Props {
 const { screenshots } = Astro.props;
 ---
 
-<div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
+<div
+	class='flex overflow-x-auto pb-10 snap-x snap-mandatory gap-6 no-scrollbar sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-x-visible sm:pb-0'
+>
 	{
 		screenshots.map((item, index) => (
 			<button
-				class='gallery-trigger group relative bg-card border-4 sm:border-8 border-border rounded-[2.5rem] overflow-hidden shadow-xl aspect-9/19 cursor-pointer hover:scale-[1.02] hover:border-primary transition-all'
+				class='hover:border-accent gallery-trigger group relative flex-none snap-center cursor-pointer hover:scale-[1.02] transition-all h-[70dvh] w-[calc(70dvh*9/19)] sm:h-auto sm:w-auto sm:aspect-9/19 bg-card border-4 sm:border-8 border-border rounded-[2.5rem] overflow-hidden shadow-xl'
 				data-index={index}
 				aria-label={`View ${item.alt} in full screen`}>
 				<Picture
@@ -29,7 +31,6 @@ const { screenshots } = Astro.props;
 		))
 	}
 </div>
-
 <dialog
 	id='lightbox'
 	class='bg-transparent backdrop:bg-background/95 backdrop:backdrop-blur-xl p-0 m-0 w-screen h-screen max-w-none max-h-none overflow-hidden outline-none'
